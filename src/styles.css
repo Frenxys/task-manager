@@ -1,10 +1,10 @@
 /* Global Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f3f4f6;
+    background-color: #121212; /* Dark background */
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #e0e0e0; /* Light text for dark theme */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,9 +17,10 @@ body {
     max-width: 600px;
     width: 100%;
     padding: 20px;
-    background: #ffffff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #1f1f1f; /* Dark background for the container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
+    overflow: hidden; /* Prevents overflow */
   }
   
   /* Header */
@@ -39,7 +40,10 @@ body {
     border-radius: 8px;
     margin-bottom: 10px;
     outline: none;
+    background-color: #333; /* Dark background for input */
+    color: #fff; /* White text in the input */
     transition: border 0.3s ease;
+    box-sizing: border-box;
   }
   
   input[type="text"]:focus {
@@ -75,21 +79,23 @@ body {
     margin: 20px 0 0 0;
   }
   
+  /* Task Item */
   li {
-    background-color: #f9f9f9;
+    background-color: #2d2d2d; /* Dark background for tasks */
     padding: 12px;
     font-size: 1rem;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #444; /* Dark border */
     border-radius: 8px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    overflow: hidden; /* Prevents overflow inside tasks */
   }
   
   li:hover {
-    background-color: #f0f0f0;
+    background-color: #3c3c3c; /* Slightly lighter on hover */
     transform: translateY(-2px);
   }
   
@@ -99,37 +105,47 @@ body {
     word-break: break-word;
   }
   
-li button.delete {
-    background-color: #e63946; /* Rosso per indicare pericolo */
+  /* Delete Button (Red X) */
+  li button.delete {
+    background-color: #e63946; /* Red for danger */
     color: white;
-    font-size: 1.2rem; /* Grandezza della X */
-    padding: 4px 8px; /* Spazio più stretto per un pulsante piccolo */
+    font-size: 1.4rem; /* Size of the X */
+    padding: 4px 8px; /* Tighter padding for small button */
     border: none;
-    border-radius: 50%; /* Pulsante rotondo */
+    border-radius: 50%; /* Round button */
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px; /* Larghezza del pulsante */
-    height: 30px; /* Altezza del pulsante */
+    width: 30px; /* Button width */
+    height: 30px; /* Button height */
     text-align: center;
     font-weight: bold;
   }
   
   li button.delete:hover {
-    background-color: #d62839; /* Rosso più scuro al passaggio del mouse */
+    background-color: #d62839; /* Darker red on hover */
   }
   
   li button.delete:active {
-    transform: scale(0.9); /* Effetto al click */
+    transform: scale(0.9); /* Click effect */
   }
   
   /* Rimuove il testo predefinito di "button" e usa solo la X */
   li button.delete::before {
-    content: "×"; /* Carattere X */
-    font-size: 1.4rem; /* Aumenta la dimensione della X */
+    content: "×"; /* X character */
+    font-size: 1.4rem; /* Increase the size of the X */
   }
   
+  /* Preventing input overflow in task form */
+  input[type="text"]:not(:focus) {
+    max-width: 100%;
+  }
   
+  /* Ensuring tasks don't overflow */
+  ul {
+    max-height: 400px;
+    overflow-y: auto;
+  }
   
