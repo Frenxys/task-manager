@@ -77,7 +77,7 @@ const TaskManager = () => {
             ) : (
               <div>
                 <span>{task.text}</span>
-                <button onClick={() => handleEditClick(task.id, task.text)}>
+                <button className="edit" onClick={() => handleEditClick(task.id, task.text)}>
                   ✏️
                 </button>
                 <button className="delete" onClick={() => deleteTask(task.id)}>

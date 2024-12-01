@@ -78,51 +78,64 @@ body {
     padding: 0;
     margin: 20px 0 0 0;
   }
-  
   /* Task Item */
-  li {
-    background-color: #2d2d2d; /* Dark background for tasks */
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #444; /* Dark border */
-    border-radius: 8px;
-    margin-bottom: 10px;
+/* Assicurati che il li utilizzi tutto lo spazio disponibile */
+li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    overflow: hidden; /* Prevents overflow inside tasks */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box; /* Assicurati che padding e bordo siano inclusi nella larghezza */
   }
+  
+  /* Pulsanti di modifica e cancellazione */
+  li button.edit, li button.delete {
+    flex-shrink: 1; /* Permetti ai pulsanti di ridursi */
+    width: 25px;
+    height: 25px;
+    padding: 4px 8px;
+    font-size: 1rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  /* Div che contiene i pulsanti */
+  li div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px; /* Riduci lo spazio tra i pulsanti */
+    flex-grow: 1;
+  }
+  
+  
+  /* Task Text */
+  li span {
+    flex-grow: 1; /* Makes the text take up the remaining space */
+  }
+  
+  /* Div containing the buttons */
+ 
+  
   
   li:hover {
     background-color: #3c3c3c; /* Slightly lighter on hover */
     transform: translateY(-2px);
   }
   
-  /* Task Text */
-  li span {
-    flex-grow: 1;
-    word-break: break-word;
-  }
-  
+
+li button.edit {
+  background-color: #0078d4; /* Colore blu per il pulsante di modifica */
+  color: white; /* Colore del testo (bianco) */
+}li button.delete {
+    background-color: #e63946; /* Colore rosso per il pulsante di cancellazione */
+    color: white; /* Colore del testo (bianco) */
+  }  
   /* Delete Button (Red X) */
-  li button.delete {
-    background-color: #e63946; /* Red for danger */
-    color: white;
-    font-size: 1.4rem; /* Size of the X */
-    padding: 4px 8px; /* Tighter padding for small button */
-    border: none;
-    border-radius: 50%; /* Round button */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px; /* Button width */
-    height: 30px; /* Button height */
-    text-align: center;
-    font-weight: bold;
-  }
+
   
   li button.delete:hover {
     background-color: #d62839; /* Darker red on hover */
@@ -147,5 +160,15 @@ body {
   ul {
     max-height: 400px;
     overflow-y: auto;
+  }
+  /* Edit Button (✏️) */
+
+  
+  li button.edit:hover {
+    background-color: #005a9e; /* Colore di hover più scuro per il pulsante di modifica */
+  }
+  
+  li button.edit:active {
+    transform: scale(0.9); /* Effetto di click */
   }
   
