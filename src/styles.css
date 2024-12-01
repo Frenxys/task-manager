@@ -99,23 +99,37 @@ body {
     word-break: break-word;
   }
   
-  /* Delete Button (optional if adding delete functionality) */
-  li button {
-    background-color: #e63946;
+li button.delete {
+    background-color: #e63946; /* Rosso per indicare pericolo */
     color: white;
-    font-size: 0.9rem;
-    padding: 6px 12px;
+    font-size: 1.2rem; /* Grandezza della X */
+    padding: 4px 8px; /* Spazio più stretto per un pulsante piccolo */
     border: none;
-    border-radius: 8px;
+    border-radius: 50%; /* Pulsante rotondo */
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Larghezza del pulsante */
+    height: 30px; /* Altezza del pulsante */
+    text-align: center;
+    font-weight: bold;
   }
   
-  li button:hover {
-    background-color: #d62839;
+  li button.delete:hover {
+    background-color: #d62839; /* Rosso più scuro al passaggio del mouse */
   }
   
-  li button:active {
-    transform: scale(0.95);
+  li button.delete:active {
+    transform: scale(0.9); /* Effetto al click */
   }
+  
+  /* Rimuove il testo predefinito di "button" e usa solo la X */
+  li button.delete::before {
+    content: "×"; /* Carattere X */
+    font-size: 1.4rem; /* Aumenta la dimensione della X */
+  }
+  
+  
   

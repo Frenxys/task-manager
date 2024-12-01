@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 
 const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +24,10 @@ const TaskManager = () => {
     }
   };
 
+  const removeTask = async (id) => {
+    await deleteDoc(doc(db, "tasks", id));
+  };
+
   return (
     <div>
       <h1>Task Manager</h1>
@@ -36,7 +40,10 @@ const TaskManager = () => {
       <button onClick={addTask}>Add Task</button>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>{task.text}</li>
+          <li key={task.id}>
+            <span>{task.text}</span>
+            <button className="delete" onClick={() => removeTask(task.id)}></button>
+          </li>
         ))}
       </ul>
     </div>
