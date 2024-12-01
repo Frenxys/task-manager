@@ -5,9 +5,8 @@ import { AuthProvider, useAuth } from "./components/AuthContext";
 import "./styles.css";
 
 const AppContent = () => {
-  const { isAuthenticated, login } = useAuth();
-
-  return isAuthenticated ? <TaskManager /> : <Login onLogin={login} />;
+  const { user } = useAuth();
+  return user ? <TaskManager /> : <Login />;
 };
 
 function App() {
