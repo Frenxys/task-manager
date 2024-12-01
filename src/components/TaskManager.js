@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "../firebase";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
 
 const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 
-  const addTask = () => {
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "tasks"), (snapshot) => {
+      const tasksData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setTasks(tasksData);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const addTask = async () => {
     if (newTask.trim()) {
-      setTasks([...tasks, newTask]);
+      await addDoc(collection(db, "tasks"), { text: newTask });
       setNewTask("");
     }
   };
@@ -22,8 +35,8 @@ const TaskManager = () => {
       />
       <button onClick={addTask}>Add Task</button>
       <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>{task}</li>
+        {tasks.map((task) => (
+          <li key={task.id}>{task.text}</li>
         ))}
       </ul>
     </div>
