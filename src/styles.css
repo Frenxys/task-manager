@@ -1,0 +1,121 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  /* Container */
+  #root {
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+  
+  /* Header */
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #0078d4;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Area */
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border 0.3s ease;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #0078d4;
+  }
+  
+  /* Button */
+  button {
+    width: 100%;
+    background-color: #0078d4;
+    color: #ffffff;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #005a9e;
+  }
+  
+  button:active {
+    transform: scale(0.98);
+  }
+  
+  /* Task List */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+  }
+  
+  li {
+    background-color: #f9f9f9;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  li:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+  }
+  
+  /* Task Text */
+  li span {
+    flex-grow: 1;
+    word-break: break-word;
+  }
+  
+  /* Delete Button (optional if adding delete functionality) */
+  li button {
+    background-color: #e63946;
+    color: white;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  li button:hover {
+    background-color: #d62839;
+  }
+  
+  li button:active {
+    transform: scale(0.95);
+  }
+  
