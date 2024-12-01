@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     await signOut(auth);
   };
+  
 
   // Registrazione con email e password
   const register = async (email, password) => {

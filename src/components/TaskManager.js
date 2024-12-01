@@ -4,7 +4,7 @@ import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, query, where
 import { useAuth } from "./AuthContext"; // Importa il contesto per ottenere l'utente
 
 const TaskManager = () => {
-  const { user } = useAuth(); // Ottieni l'utente loggato
+  const { user, logout } = useAuth(); // Ottieni l'utente loggato e la funzione logout
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [editingTaskId, setEditingTaskId] = useState(null);
@@ -46,7 +46,7 @@ const TaskManager = () => {
     setEditingTaskId(taskId);
     setEditingText(currentText);
   };
-
+  
   // Funzione per salvare la modifica della task
   const handleSaveEdit = async () => {
     if (editingText.trim() === "") {
@@ -66,6 +66,15 @@ const TaskManager = () => {
 
   return (
     <div className="container">
+      {/* Pulsante di Logout in alto a destra */}
+      <button 
+  onClick={logout} 
+  className="logout-button"
+>
+  Logout
+</button>
+
+
       <h1>Task Manager</h1>
       <input
         type="text"
