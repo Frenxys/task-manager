@@ -1,40 +1,53 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
-import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { db, auth } from "../firebase"; // Importa anche auth
+import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, query, where } from "firebase/firestore";
+import { useAuth } from "./AuthContext"; // Importa il contesto per ottenere l'utente
 
 const TaskManager = () => {
+  const { user } = useAuth(); // Ottieni l'utente loggato
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editingText, setEditingText] = useState("");
 
+  // Funzione per recuperare le task dell'utente loggato
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "tasks"), (snapshot) => {
-      const tasksData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setTasks(tasksData);
-    });
-    return () => unsubscribe();
-  }, []);
+    if (user) {
+      const q = query(collection(db, "tasks"), where("userId", "==", user.uid)); // Filtra per l'ID dell'utente
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const tasksData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTasks(tasksData);
+      });
+      return () => unsubscribe();
+    }
+  }, [user]);
 
+  // Funzione per aggiungere una task
   const addTask = async () => {
-    if (newTask.trim()) {
-      await addDoc(collection(db, "tasks"), { text: newTask });
+    if (newTask.trim() && user) {
+      await addDoc(collection(db, "tasks"), {
+        text: newTask,
+        userId: user.uid, // Aggiungi l'ID dell'utente
+      });
       setNewTask("");
     }
   };
 
+  // Funzione per eliminare una task
   const deleteTask = async (id) => {
     await deleteDoc(doc(db, "tasks", id));
   };
 
+  // Funzione per iniziare a modificare una task
   const handleEditClick = (taskId, currentText) => {
     setEditingTaskId(taskId);
     setEditingText(currentText);
   };
 
+  // Funzione per salvare la modifica della task
   const handleSaveEdit = async () => {
     if (editingText.trim() === "") {
       return;
