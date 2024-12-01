@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "../firebase"; // Import Firebase auth
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth } from "../firebase"; // Importa il servizio di autenticazione Firebase
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 
 // Crea il contesto
 const AuthContext = createContext();
@@ -32,8 +32,13 @@ export const AuthProvider = ({ children }) => {
     await signOut(auth);
   };
 
+  // Registrazione con email e password
+  const register = async (email, password) => {
+    await createUserWithEmailAndPassword(auth, email, password);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, register }}>
       {!loading && children}
     </AuthContext.Provider>
   );
